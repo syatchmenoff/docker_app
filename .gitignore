@@ -1,1 +1,5 @@
 /.vagrant
+.*.swp
+/target
+/project/target
+/project/project
