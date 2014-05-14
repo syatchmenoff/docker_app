@@ -11,8 +11,14 @@ sudo apt-get update
 sudo apt-get install -y lxc-docker
 sudo usermod -G docker vagrant
 sudo apt-get install -y openjdk-7-jre curl
-sudo curl http://repo.scala-sbt.org/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.deb -o /tmp/sbt.deb
+sudo curl -s http://repo.scala-sbt.org/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.13.1/sbt.deb -o /tmp/sbt.deb
 sudo dpkg --install /tmp/sbt.deb
+sudo apt-get install -y nginx
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /vagrant/frontend/nginx/frontend.conf /etc/nginx/conf.d/frontend.conf
+#sudo ln -s /opt/public /vagrant/frontend/public
+sudo sh -c "echo 127.0.0.1 backend >> /etc/hosts"
+sudo service nginx restart
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
