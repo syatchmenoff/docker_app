@@ -18,10 +18,15 @@ Login to your Vagrant VM:
 ## Building
 In your Vagrant VM:
 
-    cd /vagrant
-    docker build -t exampleservice .
+    cd /vagrant/backend
+    sbt stage
+    docker build -t examplebackend .
+
+    cd /vagrant/frontend
+    docker build -t examplefrontend .
 
 ## Running
 In your Vagrant VM:
 
-    docker run --rm=true -i -t -p 8000:8000 exampleservice
+    docker run --rm=true -i -t --name backend examplebackend
+    docker run --rm=true -i -t --name frontend --link backend:backend -p 80:80 examplefrontend

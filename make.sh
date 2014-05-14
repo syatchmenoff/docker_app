@@ -2,9 +2,12 @@
 
 set -e
 
-cd $( dirname "${BASH_SOURCE[0]}" )
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+ROOT=$( pwd )
 
+cd $ROOT/backend
 sbt stage
-docker build -t exampleservice .
+docker build -t examplebackend .
 
-docker run --rm=true -i -t -p 8000:8000 exampleservice
+cd $ROOT/frontend
+docker build -t examplefrontend .

@@ -1,6 +1,5 @@
-FROM ubuntu:14.04
-RUN apt-get update
-RUN apt-get -y install nginx
-ADD public target/universal/stage /opt/app
-EXPOSE 8000
-ENTRYPOINT ["/opt/app/bin/example-service"]
+FROM samyjanrain/nginx
+ADD nginx/nginx.conf /etc/nginx/nginx.conf
+ADD public /opt/public
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/nginx"]
