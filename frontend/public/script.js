@@ -9,7 +9,7 @@ function refresh() {
       if(messages.length > 0) {
         lastMessageId = messages[messages.length - 1].id;
         $.each(messages, function(index, message) {
-          $("#history").prepend("&gt; " + message.value + "\n");
+          $("#history").text("> " + message.value + "\n" + $("#history").text());
         });
       }
       console.log("lastMessageId == " + lastMessageId);
