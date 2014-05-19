@@ -57,6 +57,9 @@ trait ExampleService extends HttpService {
   implicit val timeout = Timeout(1.second)
 
   val route: Route = {
+    (path("ops" / "monitor") & get) {
+      complete { Map("status" -> "ok") }
+    } ~
     (path("api" / "v1" / "messages") & get & parameters('after.as[Long], 'count.as[Int])) { (after, count) =>
       complete {
         for {

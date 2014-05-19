@@ -1,0 +1,11 @@
+- hosts: 127.0.0.1
+  tasks:
+  - apt: update_cache=yes
+  - apt: name=openjdk-7-jdk state=present
+  - apt: name=nginx state=present
+  - copy: src=nginx.conf dest=/etc/nginx/conf.d/example-service.conf
+  - copy: src=upstart.conf dest=/etc/init/example-service.conf
+  - copy: src=./ dest=/opt/example-service
+  - file: path=/opt/example-service/bin/example-service mode=0755
+  - service: name=example-service state=restarted enabled=yes
+  - service: name=nginx state=restarted enabled=yes
