@@ -5,14 +5,12 @@ function refresh() {
     dataType: "json",
     url: "api/v1/messages?after=" + lastMessageId + "&count=10",
     success: function(messages) {
-      console.log("messages == " + JSON.stringify(messages));
       if(messages.length > 0) {
         lastMessageId = messages[messages.length - 1].id;
         $.each(messages, function(index, message) {
           $("#history").text("> " + message.value + "\n" + $("#history").text());
         });
       }
-      console.log("lastMessageId == " + lastMessageId);
       setTimeout(refresh, 1000);
     },
     error: function(xhr, status, error) {
@@ -33,7 +31,6 @@ $(document).ready(function() {
     $("#input").val("");
   });
   refresh();
-  console.log("OK!");
 });
 
 

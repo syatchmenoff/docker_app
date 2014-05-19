@@ -3,6 +3,7 @@
   - apt: update_cache=yes
   - apt: name=openjdk-7-jdk state=present
   - apt: name=nginx state=present
+  - file: path=/etc/nginx/sites-available/default state=absent
   - copy: src=nginx.conf dest=/etc/nginx/conf.d/example-service.conf
   - copy: src=upstart.conf dest=/etc/init/example-service.conf
   - copy: src=./ dest=/opt/example-service
